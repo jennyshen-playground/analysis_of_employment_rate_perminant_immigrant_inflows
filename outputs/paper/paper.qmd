@@ -1,88 +1,30 @@
 ---
-title: "My title"
-subtitle: "My subtitle if needed"
+title: "Positive Relationship between a Country's Employment Rate and Permanent Immigrant Inflows"
+subtitle: "An Analysis of United States, Canada, United Kingdom, Australia, and Japan"
 author: 
-  - First author
-  - Another author
-thanks: "Code and data are available at: LINK."
+  - Jenny Shen
+thanks: "Code and data are available at: https://github.com/jennyshen-playground/analysis_of_employment_rate_perminant_immigrant_inflows.git."
 date: "`r Sys.time()`"
 date-format: "D MMMM YYYY"
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract: "This paper explores the relationship between a country's employment rate and its ability to attract and retain permanent immigrants. Using a linear regression analysis, we examine five countries with relatively high immigration numbers: United States, Canada, United Kingdom, Australia, and Japan from 2008 to 2018. We drawn data  from the OECD website, with a focus on the percentage of the working-age population. These findings matter as they can influence permanent immigrant inflows and guide governments in developing policies to attract and retain permanent immigrants.The rise of employment rate can enhance economic development, and also associates with increased number of permanent immigrants inflow. This suggests that improving employment rate leads to better immigration that generate significant economic and social benefits for a country."
 format: pdf
 number-sections: true
 bibliography: references.bib
 ---
 
-```{r}
-#| include: false
-#| warning: false
-#| message: false
-
-library(tidyverse)
-library(palmerpenguins)
-```
-
-
 # Introduction
 
-You can and should cross-reference sections and sub-sections. For instance, @sec-data and @sec-first-point. 
+Immigration has been a key driver of economic growth and cultural diversity for countries around the world. Over the past two decades, many countries have opened doors to immigration, recognizing the significant economic and social benefits that immigration can bring. However, immigration policies and their implementation have varied across countries, with some facing challenges in attracting and retaining permanent immigrants. One possible factor that could influence a country’s ability to attract and retain immigrants is its employment rate. High employment rates means that the country has economic stability and job opportunities, making a country a more attractive destination for permanent immigrants. Whereas, low employment rates could signal economic instability, leading to a decrease in permanent immigrant inflows. 
 
+In this paper, we will examine the relationship between a country's employment rate and permanent immigrant inflows through a linear regression analysis, providing insights into the factors that influence permanent immigrant inflows and guiding governments in developing policies to attract and retain permanent immigrants. Specifically, we will focus on 5 countries with relatively high immigration numbers (United States, Canada, United Kingdom, Australia, and Japan). We will draw data from the OECD website. Our respondents of interest are the percentage of the working-age population, as they represent the potential labor force and have a significant impact on a country's economic growth and development.
 
+Understanding the relationship between the employment rate and permanent immigrant inflows is a critical factor for governments to design effective immigration policies and to drive social and economic development. This exploration can provide valuable insights for government officials and policy makers in developing policies to attract and retain permanent immigrants and influencing permanent immigrant inflows. In addition, this research can impact immigration policy, as well as economic development strategies that can benefit the labour market and immigration.
+
+In section 1, we discuss the source of data used in this paper, the strengths and weaknesses of OECD, methodologies that follow it, and data terminology. In section 2, we present the results of our analysis, focusing on the trajectory of employment rate and permanent immigrant inflows over the past 10 years in the United States, Canada, the United Kingdom, Australia, and Japan. In section 3, we explore the factors that contribute to permanent immigrant inflows and We will examine the patterns and trends to highlight the similarities and differences in each countries immigration patterns. In particular, how economic factor influence a country's ability to attract and retain permanent immigrants.The final section provides an analysis of the bias and ethical concerns, and weakness and steps. 
 
 # Data {#sec-data}
 
-Our data is of penguins (@fig-bills).
-
-```{r}
-#| label: fig-bills
-#| fig-cap: Bills of penguins
-#| echo: false
-
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = "none") +
-  theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
-```
-
-Talk more about it.
-
-Also bills and their average (@fig-billssssss). (You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work.)
-
-```{r}
-#| label: fig-billssssss
-#| fig-cap: More bills of penguins
-#| echo: false
-#| fig-width: 8
-#| fig-height: 4
-
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(alpha = 0.8) +
-  scale_fill_manual(values = c("darkorange","purple","cyan4"),
-                    guide = "none") +
-  theme_minimal() +
-  facet_wrap(~species, ncol = 1) +
-  coord_flip()
-```
-
-Talk way more about it. 
-
-
-
 # Model
-
-$$
-Pr(\theta | y) = \frac{Pr(y | \theta) Pr(\theta)}{Pr(y)}
-$$ {#eq-bayes}
-
-@eq-bayes seems useful, eh?
-
-Here's a dumb example of how to use some references: In paper we run our analysis in `R` [@citeR]. We also use the `tidyverse` which was written by @thereferencecanbewhatever If we were interested in baseball data then @citeLahman could be useful. 
-
-We can use maths by including latex between dollar signs, for instance $\theta$.
-
 
 # Results
 
