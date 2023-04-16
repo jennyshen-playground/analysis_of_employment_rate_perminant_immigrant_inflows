@@ -1,26 +1,25 @@
 #### Preamble ####
-# Purpose: Downloads and saves the data from [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
-# Data: 11 February 2023 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
+# Purpose: Gather the relevant points, clean up the column names and refine their values
+# Author: Jenny Shen
+# Data: 04 April 2023
+# Contact: jennycy.shen@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
-
+# Pre-requisites: Access to the OECD employment rate and Permanent Immigrants Inflows to understand the recoding of values.
 
 #### Workspace setup ####
-library(opendatatoronto)
 library(tidyverse)
-# [...UPDATE THIS...]
+library(haven)
+library(here)
 
 #### Download data ####
-# [...ADD CODE HERE TO DOWNLOAD...]
 
-
+##Data was downloaded from https://data.oecd.org/emp/employment-rate.htm, from the individual data sets.
+##Data sets from years 2008 - 2019 were downloaded manually.
 
 #### Save data ####
-# [...UPDATE THIS...]
-# change the_raw_data to whatever name you assigned when you downloaded it.
-write_csv(the_raw_data, "inputs/data/raw_data.csv") 
+
+permanent_immigrant <- read_csv(here::here("inputs/data/DP_LIVE_04042023230723620.csv"))
+employment_rate <- read_csv(here::here("inputs/data/DP_LIVE_04042023230450558.csv"))
+
 
          
