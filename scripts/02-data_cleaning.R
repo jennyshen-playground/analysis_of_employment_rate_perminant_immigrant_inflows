@@ -21,9 +21,9 @@ permanent_immigrant_inflows_cleaned <- permanent_immigrant |> select(LOCATION,TI
 # Read in the employment rate data
 employment_rate_table <- read_csv(here::here("inputs/data/DP_LIVE_04042023230450558.csv"))
 employment_rate_cleaned <- employment_rate_table %>%
-  filter(LOCATION != "OECD") %>%
-  filter(TIME < 2019)
-employment_rate_cleaned <- employment_rate_cleaned |> select(LOCATION,TIME, Value)
+  filter(!LOCATION %in% c("OECD","DEU","ITA","FRA")) %>%
+  filter(TIME < 2019) %>%
+  select(LOCATION, TIME, Value)
 
 ### Rename columns so they are easier to read ###
 permanent_immigrant_inflows_cleaned <- permanent_immigrant_inflows_cleaned |> rename(

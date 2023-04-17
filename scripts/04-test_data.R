@@ -10,3 +10,6 @@
 library(tidyverse)
 
 #### Test data ####
+
+## Test if Employment_Rate is less than 75
+merged_data$Employment_Rate |> min(na.rm = TRUE) > 75
