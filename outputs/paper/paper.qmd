@@ -31,7 +31,7 @@ In section 1, we discuss the source of data used in this paper, the strengths an
 #| include: false
 #| warning: false
 #| message: false
-#| 
+
 #### Initialize quarto workspace by reading csv's ####
 library(tidyverse)
 library(here)
@@ -40,6 +40,8 @@ permanent_immigrant <- read_csv(here::here("inputs/data/permanent_immigrant_infl
 employment_rate <- read_csv(here::here("inputs/data/employment_rate_cleaned.csv"))
 merged_data <- read_csv(here::here("inputs/data/merged_data.csv"))
 ```
+
+## Permanent Immigrants Inflows from 2009 to 2019
 
 ```{r}
 
@@ -58,12 +60,50 @@ merged_data %>%
   labs(
     title = "Permanent Immigrants Inflows in Canada from 2009 to 2019",
     x = "Year",
-    y = "Permanent Inflows" 
+    y = "Permanent Immigrants Inflows" 
   )
 
 ```
 
+\
+## Employment Rate from 2009 to 2019
+
+```{r}
+
+#| label: fig-1
+#| fig-cap: A graph detailing that the overall increase in Canada's permenant immigration inflow from 2009 to 2019 which is from 249292 to 341173.
+#| echo: false
+#| warning: false
+
+merged_data %>%
+  group_by(Year) %>%
+  summarize(Employment_Rate = sum(Employment_Rate, na.rm = TRUE)) %>%
+  ggplot(aes(x = Year, y = Employment_Rate)) +
+  geom_line(group = 1, color = "blue") +
+  scale_x_continuous(breaks = seq(2009, 2019, by = 1), labels = c("2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019")) +
+  theme_bw() +
+  labs(
+    title = "Employment Rate in Canada from 2009 to 2019",
+    x = "Year",
+    y = "Employment Rate" 
+  )
+
+```
+
+
 # Model
+
+$$
+Pr(\theta | y) = \frac{Pr(y | \theta) Pr(\theta)}{Pr(y)}
+$$ {#eq-bayes}
+
+The goal of our modelling strategy is twofold. Firstly,...
+
+Here we briefly describe the Bayesian analysis model used to investigate... Background details and diagnostics are included in [Appendix -@sec-model-details]
+
+## Model set-up
+
+We run the model in R [@citeR] using the `rstanarm` package of @rstanarm. We use the default priors from `rstanarm`.
 
 # Results
 
