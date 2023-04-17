@@ -16,13 +16,16 @@ library(dplyr)
 
 ### First, select variables corresponding to perminant immigrant, location, time, numbers of permanent inflows.
 permanent_immigrant <- read_csv(here::here("inputs/data/DP_LIVE_04042023230723620.csv"))
-permanent_immigrant_inflows_cleaned <- permanent_immigrant |> select(LOCATION,TIME, Value)
+  permanent_immigrant_inflows_cleaned <- permanent_immigrant %>%
+  filter(!LOCATION %in% c("DEU","ITA","FRA","USA", "AUS", "GBR", "JPN")) %>%
+  filter(TIME > 2008 & TIME < 2020) %>%
+  select(LOCATION,TIME, Value)
 
 # Read in the employment rate data
 employment_rate_table <- read_csv(here::here("inputs/data/DP_LIVE_04042023230450558.csv"))
 employment_rate_cleaned <- employment_rate_table %>%
-  filter(!LOCATION %in% c("OECD","DEU","ITA","FRA")) %>%
-  filter(TIME < 2019) %>%
+  filter(!LOCATION %in% c("OECD","DEU","ITA","FRA", "USA", "AUS", "GBR", "JPN")) %>%
+  filter(TIME > 2008 & TIME < 2020) %>%
   select(LOCATION, TIME, Value)
 
 ### Rename columns so they are easier to read ###
@@ -43,5 +46,5 @@ merged_data <- merge(employment_rate_cleaned, permanent_immigrant_inflows_cleane
 
 #### Save data ####
 write_csv(permanent_immigrant_inflows_cleaned, here::here("inputs/data/permanent_immigrant_inflows_cleaned.csv"))
-write_csv(employment_rate_cleaned, here::here("inputs/data/employment_rate_cleaned"))
-write_csv(merged_data, here::here("inputs/data/merged_data"))
+write_csv(employment_rate_cleaned, here::here("inputs/data/employment_rate_cleaned.csv"))
+write_csv(merged_data, here::here("inputs/data/merged_data.csv"))

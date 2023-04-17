@@ -12,19 +12,19 @@ library(tidyverse)
 #### Test data ####
 
 ## Test if there are 5 countries
-merged_data$Country |> unique() |> length() >=5
+merged_data$Country |> unique() |> length() >=1
 
 ## Test if there are 11 years
 merged_data$Year |> min(na.rm = TRUE) >=11
 
-## Test if the lowest Employment Rate is 66.64754
-merged_data$Employment_Rate |> min() == 66.64754
+## Test if the lowest Employment Rate is 71.50833
+merged_data$Employment_Rate |> min() == 71.50833
 
-## Test if the highest Employment Rate is 77.16330
-merged_data$Employment_Rate |> max() == 77.16330
+## Test if the highest Employment Rate is 74.60000
+merged_data$Employment_Rate |> max() == 74.60000
 
-## Test if the lowest permanent immigrant inflows is 55675.0
-merged_data$Permanent_Inflows |> min() == 55675.0
+## Test if the lowest permanent immigrant inflows is 249292
+merged_data$Permanent_Inflows |> min() == 249292
 
-## Test if the lowest permanent immigrant inflows is 1183505.0
-merged_data$Permanent_Inflows |> max() == 1183505.0
+## Test if the highest permanent immigrant inflows is 341173
+merged_data$Permanent_Inflows |> max() == 341173

@@ -19,11 +19,11 @@ bibliography: references.bib
 
 Immigration has been a key driver of economic growth and cultural diversity for countries around the world. Over the past two decades, many countries have opened doors to immigration, recognizing the significant economic and social benefits that immigration can bring. However, immigration policies and their implementation have varied across countries, with some facing challenges in attracting and retaining permanent immigrants. One possible factor that could influence a country's ability to attract and retain immigrants is its employment rate. High employment rates means that the country has economic stability and job opportunities, making a country a more attractive destination for permanent immigrants. Whereas, low employment rates could signal economic instability, leading to a decrease in permanent immigrant inflows.
 
-In this paper, we will examine the relationship between a country's employment rate and permanent immigrant inflows through a linear regression analysis, The estimand here that we're trying to estimate is the correlation of employment rate and permanent immigrants inflows. Specifically, we will focus on 5 countries with relatively high immigration numbers (United States, Canada, United Kingdom, Australia, and Japan). We will draw data from the OECD website. Our respondents of interest are the percentage of the working-age population, as they represent the potential labor force and have a significant impact on a country's economic growth and development.
+In this paper, we will examine the relationship between a country's employment rate and permanent immigrant inflows through a linear regression analysis, The estimand here that we're trying to estimate is the correlation of employment rate and permanent immigrants inflows. Specifically, we will focus Canada, which has relatively high immigration number. We will draw data from the OECD website. Our respondents of interest are the percentage of the working-age population, as they represent the potential labor force and have a significant impact on a country's economic growth and development.
 
 Understanding the relationship between the employment rate and permanent immigrant inflows is a critical factor for governments to design effective immigration policies and to drive social and economic development. This exploration can provide valuable insights for government officials and policy makers in developing policies to attract and retain permanent immigrants and influencing permanent immigrant inflows. In addition, this research can impact immigration policy, as well as economic development strategies that can benefit the labour market and immigration.
 
-In section 1, we discuss the source of data used in this paper, the strengths and weaknesses of OECD, methodologies that follow it, and data terminology. In section 2, we present the results of our analysis, focusing on the trajectory of employment rate and permanent immigrant inflows over the past 10 years in the United States, Canada, the United Kingdom, Australia, and Japan. In section 3, we explore the factors that contribute to permanent immigrant inflows and We will examine the patterns and trends to highlight the similarities and differences in each countries immigration patterns. In particular, how economic factor influence a country's ability to attract and retain permanent immigrants.The final section provides an analysis of the bias and ethical concerns, and weakness and steps.
+In section 1, we discuss the source of data used in this paper, the strengths and weaknesses of OECD, methodologies that follow it, and data terminology. In section 2, we present the results of our analysis, focusing on the trajectory of employment rate and permanent immigrant inflows over the past 20 years in Canada. In section 3, we explore the factors that contribute to permanent immigrant inflows and We will examine the patterns and trends to highlight the similarities and differences in each countries immigration patterns. In particular, how economic factor influence a country's ability to attract and retain permanent immigrants.The final section provides an analysis of the bias and ethical concerns, and weakness and steps.
 
 # Data {#sec-data}
 
@@ -37,8 +37,20 @@ library(tidyverse)
 library(here)
 
 permanent_immigrant <- read_csv(here::here("inputs/data/permanent_immigrant_inflows_cleaned.csv"))
-employment_rate <- read_csv(here::here("inputs/data/employment_rate_cleaned"))
-merged_data <- read_csv(here::here("inputs/data/merged_data"))
+employment_rate <- read_csv(here::here("inputs/data/employment_rate_cleaned.csv"))
+merged_data <- read_csv(here::here("inputs/data/merged_data.csv"))
+```
+
+```{r}
+
+#| label: fig-1
+#| fig-cap: A graph detailing that the overall increase in the permenant immigration inflow from 2008 to 2019 is from...
+#|  mean highest education level percentage of women over a 20 year period from 2000 to 2021 is from 13.0 to 13.7.
+#| echo: false
+#| warning: false
+
+
+
 ```
 
 # Model
