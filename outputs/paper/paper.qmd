@@ -1,6 +1,6 @@
 ---
 title: "Positive Relationship between a Country's Employment Rate and Permanent Immigrant Inflows"
-subtitle: "An Analysis of United States, Canada, United Kingdom, Australia, and Japan"
+subtitle: "An Analysis of Canada's Employment Rate and Permanent Immigrant Inflows"
 author: 
   - Jenny Shen
 thanks: "Code and data are available at: https://github.com/jennyshen-playground/analysis_of_employment_rate_perminant_immigrant_inflows.git."
@@ -19,7 +19,7 @@ bibliography: references.bib
 
 Immigration has been a key driver of economic growth and cultural diversity for countries around the world. Over the past two decades, many countries have opened doors to immigration, recognizing the significant economic and social benefits that immigration can bring. However, immigration policies and their implementation have varied across countries, with some facing challenges in attracting and retaining permanent immigrants. One possible factor that could influence a country's ability to attract and retain immigrants is its employment rate. High employment rates means that the country has economic stability and job opportunities, making a country a more attractive destination for permanent immigrants. Whereas, low employment rates could signal economic instability, leading to a decrease in permanent immigrant inflows.
 
-In this paper, we will examine the relationship between a country's employment rate and permanent immigrant inflows through a linear regression analysis, The estimand here that we're trying to estimate is the correlation of employment rate and permanent immigrants inflows. Specifically, we will focus Canada, which has relatively high immigration number. We will draw data from the OECD website. Our respondents of interest are the percentage of the working-age population, as they represent the potential labor force and have a significant impact on a country's economic growth and development.
+In this paper, we will examine the relationship between a country's employment rate and permanent immigrant inflows through a linear regression analysis, The estimand here is how employment rate and immigrants inflows are related. Specifically, we will focus Canada, which has relatively high immigration number. We will draw data from the OECD website. Our respondents of interest are the percentage of the working-age population, as they represent the potential labor force and have a significant impact on a country's economic growth and development.
 
 Understanding the relationship between the employment rate and permanent immigrant inflows is a critical factor for governments to design effective immigration policies and to drive social and economic development. This exploration can provide valuable insights for government officials and policy makers in developing policies to attract and retain permanent immigrants and influencing permanent immigrant inflows. In addition, this research can impact immigration policy, as well as economic development strategies that can benefit the labour market and immigration.
 
@@ -36,48 +36,49 @@ In section 1, we discuss the source of data used in this paper, the strengths an
 library(tidyverse)
 library(here)
 
-permanent_immigrant <- read_csv(here::here("inputs/data/permanent_immigrant_inflows_cleaned.csv"))
-employment_rate <- read_csv(here::here("inputs/data/employment_rate_cleaned.csv"))
+permanent_immigrant_cleaned <- read_csv(here::here("inputs/data/permanent_immigrant_inflows_cleaned.csv"))
+employment_rate_cleaned <- read_csv(here::here("inputs/data/employment_rate_cleaned.csv"))
+total_population_cleaned <- read_csv(here::here("inputs/data/total_population_cleaned.csv"))
 merged_data <- read_csv(here::here("inputs/data/merged_data.csv"))
+
 ```
 
-## Permanent Immigrants Inflows from 2009 to 2019
+## Permanent Immigrants Inflows Rate from 2009 to 2019
 
 ```{r}
-
 #| label: fig-1
 #| fig-cap: A graph detailing that the overall increase in Canada's permenant immigration inflow from 2009 to 2019 which is from 249292 to 341173.
 #| echo: false
 #| warning: false
 
-merged_data %>%
-  group_by(Year) %>%
-  summarize(Permanent_Inflows = sum(Permanent_Inflows, na.rm = TRUE)) %>%
-  ggplot(aes(x = Year, y = Permanent_Inflows)) +
+merged_data |>
+  mutate(Permanent_Inflows_Rate = (Permanent_Inflows / Population) * 100) |>
+  group_by(Year) |>
+  summarize(Permanent_Inflows_Rate = sum(Permanent_Inflows_Rate, na.rm = TRUE)) |>
+  ggplot(aes(x = Year, y = Permanent_Inflows_Rate)) +
   geom_line(group = 1, color = "red") +
   scale_x_continuous(breaks = seq(2009, 2019, by = 1), labels = c("2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019")) +
   theme_bw() +
   labs(
-    title = "Permanent Immigrants Inflows in Canada from 2009 to 2019",
+    title = "Permanent Immigrants Inflows Rate from 2009 to 2019",
     x = "Year",
-    y = "Permanent Immigrants Inflows" 
+    y = "Permanent Immigrants Inflows Rate" 
   )
 
 ```
 
 \
-## Employment Rate from 2009 to 2019
+\## Employment Rate from 2009 to 2019
 
 ```{r}
-
-#| label: fig-1
-#| fig-cap: A graph detailing that the overall increase in Canada's permenant immigration inflow from 2009 to 2019 which is from 249292 to 341173.
+#| label: fig-2
+#| fig-cap: "A graph detailing that the overall increase in Canada's permenant immigration inflow from 2009 to 2019 which is from 249292 to 341173."
 #| echo: false
 #| warning: false
 
-merged_data %>%
-  group_by(Year) %>%
-  summarize(Employment_Rate = sum(Employment_Rate, na.rm = TRUE)) %>%
+merged_data |>
+  group_by(Year) |>
+  summarize(Employment_Rate = sum(Employment_Rate, na.rm = TRUE)) |>
   ggplot(aes(x = Year, y = Employment_Rate)) +
   geom_line(group = 1, color = "blue") +
   scale_x_continuous(breaks = seq(2009, 2019, by = 1), labels = c("2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019")) +
@@ -90,8 +91,59 @@ merged_data %>%
 
 ```
 
-
 # Model
+
+```{r}
+#| echo: false
+#| warning: false
+#| label: tab-1
+#| tab-cap: "A summary table of two linear regression models"
+
+library(modelsummary)
+
+merged_data <-
+  merged_data |>
+  mutate(Permanent_Inflows_Rate = (Permanent_Inflows / Population) * 100) |>
+  mutate(Centred_Employment_Rate = Employment_Rate - mean(merged_data$Employment_Rate))
+
+merged_data_centered_model <-
+  lm(
+    Permanent_Inflows_Rate ~ Employment_Rate,
+    data = merged_data
+  )
+
+modelsummary::modelsummary(
+  list("Employment Rate" = merged_data_centered_model),
+  fmt = 2
+)
+
+```
+
+```{r}
+#| label: fig-3
+#| fig-cap: "A graph detailing that the overall increase in Canada's permenant immigration inflow from 2009 to 2019 which is from 249292 to 341173."
+#| echo: false
+#| warning: false
+
+merged_data <- merged_data %>%
+  mutate(Permanent_Inflows_Rate = Permanent_Inflows / Population * 100)
+
+  ggplot(merged_data, aes(x = Employment_Rate, y = Permanent_Inflows_Rate)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(
+    method = "lm",
+    se = TRUE,
+    color = "black",
+    linetype = "dashed",
+    formula = "y ~ x"
+  ) +
+  labs(
+    x = "Employment Rate (percentage)",
+    y = "Permanent Inflows Rate (percentage)"
+  ) +
+  theme_classic()
+  
+```
 
 $$
 Pr(\theta | y) = \frac{Pr(y | \theta) Pr(\theta)}{Pr(y)}
