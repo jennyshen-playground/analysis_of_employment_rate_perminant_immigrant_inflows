@@ -6,23 +6,40 @@ author:
 thanks: "Code and data are available at: https://github.com/jennyshen-playground/analysis_of_employment_rate_perminant_immigrant_inflows.git."
 date: "`r Sys.time()`"
 date-format: "D MMMM YYYY"
-abstract: "This paper explores the relationship between a country's employment rate and its ability to attract and retain permanent immigrants. Using a linear regression analysis, we examine five countries with relatively high immigration numbers: United States, Canada, United Kingdom, Australia, and Japan from 2008 to 2018. We drawn data  from the OECD website, with a focus on the percentage of the working-age population. These findings matter as they can influence permanent immigrant inflows and guide governments in developing policies to attract and retain permanent immigrants.The rise of employment rate can enhance economic development, and also associates with increased number of permanent immigrants inflow. This suggests that improving employment rate leads to better immigration that generate significant economic and social benefits for a country."
-format: pdf
+format: 
+  pdf:
+    documentclass: article
+    geometry: margin = 1in
+    abstract: "This paper explores the relationship between a country's employment rate and its ability to attract and retain permanent immigrants. Using a linear regression analysis, we examine five countries with relatively high immigration numbers: United States, Canada, United Kingdom, Australia, and Japan from 2008 to 2018. We drawn data  from the OECD website, with a focus on the percentage of the working-age population. These findings matter as they can influence permanent immigrant inflows and guide governments in developing policies to attract and retain permanent immigrants.The rise of employment rate can enhance economic development, and also associates with increased number of permanent immigrants inflow. This suggests that improving employment rate leads to better immigration that generate significant economic and social benefits for a country."
 number-sections: true
 bibliography: references.bib
 ---
 
 # Introduction
 
-Immigration has been a key driver of economic growth and cultural diversity for countries around the world. Over the past two decades, many countries have opened doors to immigration, recognizing the significant economic and social benefits that immigration can bring. However, immigration policies and their implementation have varied across countries, with some facing challenges in attracting and retaining permanent immigrants. One possible factor that could influence a country’s ability to attract and retain immigrants is its employment rate. High employment rates means that the country has economic stability and job opportunities, making a country a more attractive destination for permanent immigrants. Whereas, low employment rates could signal economic instability, leading to a decrease in permanent immigrant inflows. 
+Immigration has been a key driver of economic growth and cultural diversity for countries around the world. Over the past two decades, many countries have opened doors to immigration, recognizing the significant economic and social benefits that immigration can bring. However, immigration policies and their implementation have varied across countries, with some facing challenges in attracting and retaining permanent immigrants. One possible factor that could influence a country's ability to attract and retain immigrants is its employment rate. High employment rates means that the country has economic stability and job opportunities, making a country a more attractive destination for permanent immigrants. Whereas, low employment rates could signal economic instability, leading to a decrease in permanent immigrant inflows.
 
-In this paper, we will examine the relationship between a country's employment rate and permanent immigrant inflows through a linear regression analysis, The estimand here that we’re trying to estimate is the correlation of employment rate and permanent immigrants inflows. Specifically, we will focus on 5 countries with relatively high immigration numbers (United States, Canada, United Kingdom, Australia, and Japan). We will draw data from the OECD website. Our respondents of interest are the percentage of the working-age population, as they represent the potential labor force and have a significant impact on a country's economic growth and development.
+In this paper, we will examine the relationship between a country's employment rate and permanent immigrant inflows through a linear regression analysis, The estimand here that we're trying to estimate is the correlation of employment rate and permanent immigrants inflows. Specifically, we will focus on 5 countries with relatively high immigration numbers (United States, Canada, United Kingdom, Australia, and Japan). We will draw data from the OECD website. Our respondents of interest are the percentage of the working-age population, as they represent the potential labor force and have a significant impact on a country's economic growth and development.
 
 Understanding the relationship between the employment rate and permanent immigrant inflows is a critical factor for governments to design effective immigration policies and to drive social and economic development. This exploration can provide valuable insights for government officials and policy makers in developing policies to attract and retain permanent immigrants and influencing permanent immigrant inflows. In addition, this research can impact immigration policy, as well as economic development strategies that can benefit the labour market and immigration.
 
-In section 1, we discuss the source of data used in this paper, the strengths and weaknesses of OECD, methodologies that follow it, and data terminology. In section 2, we present the results of our analysis, focusing on the trajectory of employment rate and permanent immigrant inflows over the past 10 years in the United States, Canada, the United Kingdom, Australia, and Japan. In section 3, we explore the factors that contribute to permanent immigrant inflows and We will examine the patterns and trends to highlight the similarities and differences in each countries immigration patterns. In particular, how economic factor influence a country's ability to attract and retain permanent immigrants.The final section provides an analysis of the bias and ethical concerns, and weakness and steps. 
+In section 1, we discuss the source of data used in this paper, the strengths and weaknesses of OECD, methodologies that follow it, and data terminology. In section 2, we present the results of our analysis, focusing on the trajectory of employment rate and permanent immigrant inflows over the past 10 years in the United States, Canada, the United Kingdom, Australia, and Japan. In section 3, we explore the factors that contribute to permanent immigrant inflows and We will examine the patterns and trends to highlight the similarities and differences in each countries immigration patterns. In particular, how economic factor influence a country's ability to attract and retain permanent immigrants.The final section provides an analysis of the bias and ethical concerns, and weakness and steps.
 
 # Data {#sec-data}
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+#| 
+#### Initialize quarto workspace by reading csv's ####
+library(tidyverse)
+library(here)
+
+permanent_immigrant <- read_csv(here::here("inputs/data/permanent_immigrant_inflows_cleaned.csv"))
+employment_rate <- read_csv(here::here("inputs/data/employment_rate_cleaned"))
+merged_data <- read_csv(here::here("inputs/data/merged_data"))
+```
 
 # Model
 
@@ -32,7 +49,7 @@ In section 1, we discuss the source of data used in this paper, the strengths an
 
 ## First discussion point {#sec-first-point}
 
-If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this. 
+If my paper were 10 pages, then should be be at least 2.5 pages. The discussion is a chance to show off what you know and what you learnt from all this.
 
 ## Second discussion point
 
@@ -46,15 +63,10 @@ Weaknesses and next steps should also be included.
 
 \appendix
 
-# Appendix {-}
-
+# Appendix {.unnumbered}
 
 # Additional details
 
-
 \newpage
 
-
 # References
-
-

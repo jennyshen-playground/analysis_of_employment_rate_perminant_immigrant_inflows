@@ -40,3 +40,8 @@ employment_rate_cleaned <- employment_rate_cleaned |> rename(
 
 ## Create a master merged data frame ##
 merged_data <- merge(employment_rate_cleaned, permanent_immigrant_inflows_cleaned, by = c("Country", "Year"))
+
+#### Save data ####
+write_csv(permanent_immigrant_inflows_cleaned, here::here("inputs/data/permanent_immigrant_inflows_cleaned.csv"))
+write_csv(employment_rate_cleaned, here::here("inputs/data/employment_rate_cleaned"))
+write_csv(merged_data, here::here("inputs/data/merged_data"))
