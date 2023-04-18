@@ -43,6 +43,15 @@ merged_data <- read_csv(here::here("inputs/data/merged_data.csv"))
 
 ```
 
+```{r}
+#| echo: false
+#| warning: false
+
+library(knitr)
+kable(merged_data)
+
+```
+
 ## Permanent Immigrants Inflows Rate from 2009 to 2019
 
 ```{r}
