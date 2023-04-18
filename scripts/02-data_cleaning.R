@@ -59,7 +59,7 @@ employment_rate_cleaned <- employment_rate_table %>%
 employment_rate_cleaned <- employment_rate_cleaned |> rename(
   Country = LOCATION,
   Year = TIME,
-  Employment_Rate = Value
+  "Employment Rate" = Value
 )
 
 ## Create a master merged data frame ##
