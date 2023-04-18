@@ -61,10 +61,8 @@ kable(merged_data)
 #| warning: false
 
 merged_data |>
-  mutate(Permanent_Inflows_Rate = (Permanent_Inflows / Population) * 100) |>
   group_by(Year) |>
-  summarize(Permanent_Inflows_Rate = sum(Permanent_Inflows_Rate, na.rm = TRUE)) |>
-  ggplot(aes(x = Year, y = Permanent_Inflows_Rate)) +
+  ggplot(aes(x = Year, y = `Permanent Inflows Rate`)) + # Use correct column name
   geom_line(group = 1, color = "red") +
   scale_x_continuous(breaks = seq(2009, 2019, by = 1), labels = c("2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019")) +
   theme_bw() +
@@ -84,11 +82,10 @@ merged_data |>
 #| fig-cap: "A graph detailing that the overall increase in Canada's permenant immigration inflow from 2009 to 2019 which is from 249292 to 341173."
 #| echo: false
 #| warning: false
-
-merged_data |>
-  group_by(Year) |>
-  summarize(Employment_Rate = sum(Employment_Rate, na.rm = TRUE)) |>
-  ggplot(aes(x = Year, y = Employment_Rate)) +
+merged_data %>%
+  group_by(Year) %>%
+  mutate(`Employment Rate` = sum(`Employment Rate`, na.rm = TRUE)) %>%
+  ggplot(aes(x = Year, y = `Employment Rate`)) +
   geom_line(group = 1, color = "blue") +
   scale_x_continuous(breaks = seq(2009, 2019, by = 1), labels = c("2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019")) +
   theme_bw() +
@@ -112,12 +109,11 @@ library(modelsummary)
 
 merged_data <-
   merged_data |>
-  mutate(Permanent_Inflows_Rate = (Permanent_Inflows / Population) * 100) |>
-  mutate(Centred_Employment_Rate = Employment_Rate - mean(merged_data$Employment_Rate))
+  mutate(Centred_Employment_Rate = `Employment Rate` - mean(merged_data$`Employment Rate`))
 
 merged_data_centered_model <-
   lm(
-    Permanent_Inflows_Rate ~ Employment_Rate,
+    `Permanent Inflows Rate` ~ `Employment Rate`,
     data = merged_data
   )
 
@@ -134,24 +130,16 @@ modelsummary::modelsummary(
 #| echo: false
 #| warning: false
 
-merged_data <- merged_data %>%
-  mutate(Permanent_Inflows_Rate = Permanent_Inflows / Population * 100)
+library(ggplot2)
 
-  ggplot(merged_data, aes(x = Employment_Rate, y = Permanent_Inflows_Rate)) +
+merged_data %>%
+  ggplot(aes(x = `Employment Rate`, y = `Permanent Inflows Rate`)) +
   geom_point(alpha = 0.5) +
-  geom_smooth(
-    method = "lm",
-    se = TRUE,
-    color = "black",
-    linetype = "dashed",
-    formula = "y ~ x"
-  ) +
-  labs(
-    x = "Employment Rate (percentage)",
-    y = "Permanent Inflows Rate (percentage)"
-  ) +
+  geom_smooth(method = "lm", se = TRUE, color = "black", linetype = "dashed") +
+  labs(x = "Employment Rate (percentage)", y = "Permanent Inflows Rate (percentage)",
+       title = "Relationship between Employment Rate and Permanent Inflows Rate") +
   theme_classic()
-  
+
 ```
 
 $$
