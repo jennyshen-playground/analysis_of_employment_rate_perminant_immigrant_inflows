@@ -1,10 +1,10 @@
-# Starter folder
+# Analyzing the Relationship between Increased Employment Rates and Higher Permanent Immigrant Inflows
 
 ## Overview
 
-This repo provides students with a foundation for their own projects associated with *Telling Stories with Data*. You do not need every aspect for every paper and you should delete aspects that you do not need.
+This repository contains data and code used to produce a paper that analyzes the correlation between Canada's employment rate and permanent immigrant inflows rate in between 2009 to 2019, using data from the OECD.
 
-To use this folder, click the green "Code" button", then "Download ZIP". Move the downloaded folder to where you want to work on your own computer, and then modify it to suit.
+The inputs folder contains all the raw data from 11 years of OECD data ranging from 2009 - 2019.
 
 ## File Structure
 
